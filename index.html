@@ -25,7 +25,7 @@
         request.onupgradeneeded = function (event) {
             console.log('Upgrading');
             db = event.target.result;
-            // db.deleteObjectStore("person");
+
             if (!db.objectStoreNames.contains("person")) {
                 var objectStore = db.createObjectStore('person', { keyPath : "id" , autoIncrement : true});
                 objectStore.createIndex('name', 'name', { unique: false });
