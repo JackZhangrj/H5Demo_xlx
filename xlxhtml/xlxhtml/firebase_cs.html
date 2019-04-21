@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>-->
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase-messaging.js"></script>
+
+    <script>
+        // Initialize Firebase
+        // TODO: Replace with your project's customized code snippet
+        var config = {
+            apiKey: "AIzaSyBpu0NqR8PAoMxEHDS5LGbAZVj--snnJCM",
+            authDomain: "h5demo-xlx.firebaseapp.com",
+            databaseURL: "https://h5demo-xlx.firebaseio.com",
+            projectId: "h5demo-xlx",
+            storageBucket: "gs://h5demo-xlx.appspot.com",
+            messagingSenderId: "173330896606",
+        };
+        firebase.initializeApp(config);
+
+        function writeUserData(userId, name, email) {
+            firebase.database().ref('users/' + userId).set({
+                username: name,
+                email: email
+            });
+        }
+
+        function add(){
+            writeUserData(1,"frank","sunwu51@126.com")
+        }
+
+        function get() {
+          /*  var userId = firebase.auth().currentUser.uid;*/
+           return firebase.database().ref('/users/' + 1).once('value').then(function(snapshot) {
+                var username = (snapshot.val() && snapshot.val().email) || 'Anonymous';
+                // ...
+                alert(username);
+            });
+
+        }
+    </script>
+</head>
+<body>
+<button onclick="get()">click</button>
+
+</body>
+</html>
