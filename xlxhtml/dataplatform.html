@@ -27,53 +27,53 @@
     <script src="../js/leanclouddata.js"></script>
 </head>
 <body>
-    <canvas width="2560" height="1440"></canvas>
+    <canvas width="1920" height="1080"></canvas>
 <!--    <div style=" text-align:center;font-size: 100px; width: 100%; position: absolute;top:10%;" >
         <span style="color: white; font-family:SimHei;">汇利伟业大数据平台控制台</span>
     </div>-->
 
     <div style="width: 100%;height: 100%;color: white;"> <!--border:1px solid;-->
-        <div style="width: 100%;height: 300px;"><!--border:1px solid;-->
-            <div style="width: 100%;height: 80px">
+        <div style="width: 100%;height: 150px;"><!--border:1px solid;-->
+            <div style="width: 100%;height: 40px">
 
             </div>
-            <div style=" text-align:center;font-size: 100px; width: 100%;" >
-                <span style="color: white; font-family:SimHei;margin-top: 100px;">汇利伟业大数据平台控制台</span>
+            <div style=" text-align:center;font-size: 50px; width: 100%;" >
+                <span style="color: white; font-family:SimHei;margin-top: 25px;">汇利伟业大数据平台控制台</span>
             </div>
         </div>
-        <div  style="width: 100%;height: 1500px;">
+        <div  style="width: 100%;height: 750px;">
             <div style="width: 25%;float: left;">
                 <div>
-                    <div style="width: 100%;text-align:center;height: 80px;" >
-                        <span style="font-size: 50px;width: 20%;height: 80px;">区域选择</span>
+                    <div style="width: 100%;text-align:center;height: 40px;" >
+                        <span style="font-size: 25px;width: 20%;height: 40px;">区域选择</span>
                     </div>
                     <br>
                     <div style="width: 100%; clear:both;">
                         <div style="width: 40%;float: left;text-align:right;" >
-                            <span style="height: 50px;font-size: 40px">省市区</span>
+                            <span style="height: 25px;font-size: 20px">省市区</span>
                         </div>
                         <div style="width: 40%;float: left;" class="input-item ">
-                            <select id='province' style="left: 20px;width:200px;height: 50px;" onchange='search(this)'></select>
+                            <select id='province' style="left: 10px;width:100px;height: 25px;" onchange='search(this)'></select>
                         </div>
                     </div>
                     <br>
                     <br>
                     <div style="width: 100%; clear:both;">
                         <div style="width: 40%;float: left;text-align:right;">
-                            <span style="height: 50px;font-size: 40px">地级市</span>
+                            <span style="height: 25px;font-size: 20px">地级市</span>
                         </div>
                         <div style="width: 40%;float: left;" class="input-item">
-                            <select id='city' style="left: 20px; width:200px;height: 50px;" onchange='search(this)'></select>
+                            <select id='city' style="left: 10px; width:100px;height: 25px;" onchange='search(this)'></select>
                         </div>
                     </div>
                     <br>
                     <br>
                     <div style="width: 100% ;clear:both;">
                         <div style="width: 40%;float: left;text-align:right">
-                            <span style="height: 50px;font-size: 40px">区级县</span>
+                            <span style="height: 25px;font-size: 20px">区级县</span>
                         </div>
                         <div style="width: 40%;float: left;" class="input-item">
-                            <select id='district' style="left: 20px;width:200px;height: 50px;" class="input-item-prepend" onchange='search(this)'></select>
+                            <select id='district' style="left: 10px;width:100px;height: 25px;" class="input-item-prepend" onchange='search(this)'></select>
                         </div>
                     </div>
                     <br>
@@ -81,11 +81,11 @@
                 </div>
                 <br>
                 <div style="clear:both; ">
-                    <div style="width: 100%;text-align:center;height: 80px;">
-                        <span style="font-size: 50px;width: 20%;height: 80px;">区域信息</span>
+                    <div style="width: 100%;text-align:center;height: 40px;">
+                        <span style="font-size: 25px;width: 20%;height: 40px;">区域信息</span>
                     </div>
                     <br>
-                    <div style="width: 100%;height: 100%;text-align:center;font-size: 40px">
+                    <div style="width: 100%;height: 100%;text-align:center;font-size: 20px">
                         <p id="poptotaltext"></p>     <br>
                         <p id="areatotaltext"></p>     <br>
                         <p id="ploughtotaltext"></p>     <br>
@@ -101,36 +101,36 @@
 
             </div>
             <div style="width: 25%;float: left;">
-                <div style="width: 100%;text-align:center;height: 80px;">
-                    <span style="font-size: 50px;width: 20%;height: 80px;">服务及行业信息</span>
+                <div style="width: 100%;text-align:center;height: 40px;">
+                    <span style="font-size: 25px;width: 20%;height: 40px;">服务及行业信息</span>
                 </div>
                 <br>
-                <div style="width: 100%;text-align: center;font-size: 40px;">
-                    <div style="width: 100%;height: 100%; text-align:center;bottom: 0px; font-size: 40px;overflow: hidden;">
-                        <button style="position: relative; width: 30%;height: 80px; " onclick="">农化服务</button><br><br>
+                <div style="width: 100%;text-align: center;font-size: 20px;">
+                    <div style="width: 100%;height: 100%; text-align:center;bottom: 0px; font-size: 20px;overflow: hidden;">
+                        <button style="position: relative; width: 30%;height: 40px; " onclick="">农化服务</button><br><br>
                     </div>
-                    <div style="width: 100%;height: 100%; text-align:center;bottom: 0px; font-size: 40px;overflow: hidden;">
-                        <button style="position: relative; width: 30%;height: 80px; " onclick="">行业资讯</button><br><br>
+                    <div style="width: 100%;height: 100%; text-align:center;bottom: 0px; font-size: 20px;overflow: hidden;">
+                        <button style="position: relative; width: 30%;height: 40px; " onclick="">行业资讯</button><br><br>
                     </div>
-                    <div style="width: 100%;height: 100%; text-align:center;bottom: 0px; font-size: 40px;overflow: hidden;">
-                        <button style="position: relative; width: 30%;height: 80px; " onclick="">农机宝典</button><br><br>
+                    <div style="width: 100%;height: 100%; text-align:center;bottom: 0px; font-size: 20px;overflow: hidden;">
+                        <button style="position: relative; width: 30%;height: 40px; " onclick="">农机宝典</button><br><br>
                     </div>
                 </div>
                 <br>
-                <div style="width: 100%;text-align:center;height: 80px;">
-                    <span style="font-size: 50px;width: 20%;height: 80px;">区域分析</span>
+                <div style="width: 100%;text-align:center;height: 40px;">
+                    <span style="font-size: 25px;width: 20%;height: 40px;">区域分析</span>
                 </div>
                 <br>
-                <div style="width: 100%;text-align: center;font-size: 40px">
+                <div style="width: 100%;text-align: center;font-size: 20px">
                     <p id="regionaltext"></p>
                 </div>
                 <br>
                 <br>
-                <div style="width: 100%;text-align:center;height: 80px;">
-                    <span style="font-size: 50px;width: 20%;height: 80px;">指导建议</span>
+                <div style="width: 100%;text-align:center;height: 40px;">
+                    <span style="font-size: 25px;width: 20%;height: 40px;">指导建议</span>
                 </div>
                 <br>
-                <div style="width: 100%;text-align: center;font-size: 40px;">
+                <div style="width: 100%;text-align: center;font-size: 20px;">
                     <p id="suggesttext"></p>
                     <p id="suggesttext_2"></p>
                 </div>
@@ -138,18 +138,18 @@
             </div>
         </div>
         <div style="width: 100%;height: 25%;">
-            <div style="width: 100%;height: 200px;">
-                <div style="width: 100%;height: 100%; text-align:center;bottom: 0px; font-size: 40px;overflow: hidden;">
-                    <button style="position: relative; width: 30%;height: 80px; " onclick="location.href='../xlxhtml/navigation.html'">返回</button><br><br>
+            <div style="width: 100%;height: 100px;">
+                <div style="width: 100%;height: 100%; text-align:center;bottom: 0px; font-size: 20px;overflow: hidden;">
+                    <button style="position: relative; width: 30%;height: 40px; " onclick="location.href='../xlxhtml/navigation.html'">返回</button><br><br>
                 </div>
             </div>
-            <div id="column_cs_1" style="width: 33.33%;height: 500px;float: left; ">
+            <div id="column_cs_1" style="width: 33.33%;height: 250px;float: left; ">
 
             </div>
-            <div id="column_cs_2" style="width: 33.33%;height: 500px;float: left;">
+            <div id="column_cs_2" style="width: 33.33%;height: 250px;float: left;">
 
             </div>
-            <div id="column_cs_3" style="width: 33.33%;height: 500px;float: left;">
+            <div id="column_cs_3" style="width: 33.33%;height: 250px;float: left;">
 
             </div>
 
@@ -441,7 +441,7 @@
                     data : ['大田作物', '经济作物'],
                     axisTick: {
                         alignWithLabel: true
-                    }
+                    },
                 }
             ],
             yAxis : [
