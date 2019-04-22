@@ -8,6 +8,7 @@
     <script type="text/javascript" src="../js/bgcanvas.js"></script>
 
     <script type="text/javascript" src="//webapi.amap.com/maps?v=1.4.14&key=35380e9ca7fbd13031eb6a6bb9021581&plugin=AMap.DistrictSearch"></script><!--高德地图-->
+    <script src="../js/gdmap.js"></script>
     <script type="text/javascript" src="//webapi.amap.com/demos/js/liteToolbar.js"></script>
     <link rel="stylesheet" href="//a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
 
@@ -21,6 +22,9 @@
     <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script>
     <script type="text/javascript" src="//echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
     <script type="text/javascript" src="//echarts.baidu.com/gallery/vendors/simplex.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.13.0/dist/av-live-query-min.js"></script>
+    <script src="../js/leanclouddata.js"></script>
 </head>
 <body>
     <canvas width="2560" height="1440"></canvas>
@@ -82,14 +86,14 @@
                     </div>
                     <br>
                     <div style="width: 100%;height: 100%;text-align:center;font-size: 40px">
-                        <p>总人口(万)：暂无数据</p>     <br>
-                        <p>总面积(公里)：暂无数据</p>     <br>
-                        <p>耕地面积(万亩)：暂无数据</p>     <br>
-                        <p>大田作物(万吨)：暂无数据</p>     <br>
-                        <p>经济作物(万吨)：暂无数据</p>     <br>
-                        <p>经销商数量(个)：暂无数据</p>     <br>
-                        <p>零售商数量(个)：暂无数据</p>     <br>
-                        <p>种植大户数量(个)：暂无数据</p>     <br>
+                        <p id="poptotaltext"></p>     <br>
+                        <p id="areatotaltext"></p>     <br>
+                        <p id="ploughtotaltext"></p>     <br>
+                        <p id="fieldcropsdatatext"></p>     <br>
+                        <p id="cashcropdatatext"></p>     <br>
+                        <p id="dealerdatatext"></p>     <br>
+                        <p id="shopkeeperdatatext"></p>     <br>
+                        <p id="plantinglargedatatext"></p>     <br>
                     </div>
                 </div>
             </div>
@@ -118,7 +122,7 @@
                 </div>
                 <br>
                 <div style="width: 100%;text-align: center;font-size: 40px">
-                    <p>暂无</p>
+                    <p id="regionaltext"></p>
                 </div>
                 <br>
                 <br>
@@ -127,9 +131,9 @@
                 </div>
                 <br>
                 <div style="width: 100%;text-align: center;font-size: 40px;">
-                    <p>暂无</p>
+                    <p id="suggesttext"></p>
+                    <p id="suggesttext_2"></p>
                 </div>
-
 
             </div>
         </div>
@@ -152,6 +156,89 @@
         </div>
     </div>
 </body>
+<script>
+    var poptotaltext = document.getElementById('poptotaltext');
+    var areatotaltext = document.getElementById('areatotaltext');
+    var ploughtotaltext = document.getElementById('ploughtotaltext');
+    var fieldcropsdatatext = document.getElementById('fieldcropsdatatext');
+    var cashcropdatatext = document.getElementById('cashcropdatatext');
+    var dealerdatatext = document.getElementById('dealerdatatext');
+    var shopkeeperdatatext = document.getElementById('shopkeeperdatatext');
+    var plantinglargedatatext = document.getElementById('plantinglargedatatext');
+
+    var regionaltext = document.getElementById('regionaltext');
+    var suggesttext = document.getElementById('suggesttext');
+    var suggesttext_2 = document.getElementById('suggesttext_2');
+
+    window.onload=function()
+    {
+        starttextdata();
+        setoption1(100,100,100);
+        setoption2(100,100);
+        setoption3(100,80,50);
+    }
+
+    function starttextdata()
+    {
+        poptotaltext.innerHTML="总人口(万)：暂无数据";
+        areatotaltext.innerHTML="总面积(公里)：暂无数据";
+        ploughtotaltext.innerHTML="耕地面积(万亩)：暂无数据";
+        fieldcropsdatatext.innerHTML="大田作物(万吨)：暂无数据";
+        cashcropdatatext.innerHTML="经济作物(万吨)：暂无数据";
+        dealerdatatext.innerHTML="经销商数量(个)：暂无数据";
+        shopkeeperdatatext.innerHTML="零售商数量(个)：暂无数据";
+        plantinglargedatatext.innerHTML="种植大户数量(个)：暂无数据";
+        regionaltext.innerHTML="暂无";
+        suggesttext.innerHTML="暂无";
+        suggesttext_2.innerHTML="";
+    }
+
+/*    var Todo = AV.Object.extend('Todo');
+    var Query=new AV.Query("Todo");*/
+
+    function settextdata(district) {
+        // 新建一个 Todo 对象
+        console.log(district);
+        Query.equalTo('district', district);
+
+        Query.find().then(function(results) {
+            // 返回一个符合条件的 list
+            if(results.length!=0)
+            {
+                console.log("数据库中有该数据");
+                var obj = results[0];
+                console.log(obj.attributes);
+                poptotaltext.innerHTML="总人口(万)："+obj.get("poptotal");
+                areatotaltext.innerHTML="总面积(公里)："+obj.get("areatotal");
+                ploughtotaltext.innerHTML="耕地面积(万亩)："+obj.get("ploughtotal");
+                fieldcropsdatatext.innerHTML="大田作物(万吨)："+obj.get("fieldcropsdata");
+                cashcropdatatext.innerHTML="经济作物(万吨)："+obj.get("cashcropdata");
+                dealerdatatext.innerHTML="经销商数量(个)："+obj.get("dealerdata");
+                shopkeeperdatatext.innerHTML="零售商数量(个)："+obj.get("shopkeeperdata");
+                plantinglargedatatext.innerHTML="种植大户数量(个)："+obj.get("plantinglargedata");
+                regionaltext.innerHTML=district +"耕地面积占总面积:"+Math.ceil(parseInt(obj.get("ploughtotal"))/parseInt(obj.get("areatotal"))*100)+"%";
+                var math_1=(obj.get("shopkeeperdata")/obj.get("dealerdata")).toFixed(2);
+                var math_text= math_1>1?"小":"大";
+                suggesttext.innerHTML="本地区经销商：零售商 = 1："+math_1;
+                suggesttext_2.innerHTML="市场潜力："+math_text;
+                setoption1(obj.get("dealerdata"),obj.get("shopkeeperdata"),obj.get("plantinglargedata"));
+                setoption2(obj.get("fieldcropsdata"),obj.get("cashcropdata"));
+                setoption3(obj.get("areatotal"),obj.get("ploughtotal"),obj.get("poptotal"));
+            }
+            else
+            {
+                starttextdata();
+                console.log("数据库中无该数据");
+                setoption1(100,100,100);
+                setoption2(100,100);
+                setoption3(100,80,50);
+            }
+        }).catch(function(error) {
+            // catch 方法写在 Promise 链式的最后，可以捕捉到全部 error
+            console.log(error);
+        });
+    }
+</script>
 
 <script type="text/javascript">
     var map, district, polygons = [], citycode;
@@ -176,7 +263,7 @@
             getData(result.districtList[0]);
         }
     });
-    function getData(data,level) {
+    function getData(data,level,objtext) {
         var bounds = data.boundaries;
         if (bounds) {
             for (var i = 0, l = bounds.length; i < l; i++) {
@@ -202,25 +289,30 @@
             districtSelect.innerHTML = '';
 /*            areaSelect.innerHTML = '';*/
         } else if (level === 'district') {
+            settextdata(objtext);
 /*            areaSelect.innerHTML = '';*/
         }
 
-        var subList = data.districtList;
-        if (subList) {
-            var contentSub = new Option('--请选择--');
-            var curlevel = subList[0].level;
-            var curList =  document.querySelector('#' + curlevel);
-            curList.add(contentSub);
-            for (var i = 0, l = subList.length; i < l; i++) {
-                var name = subList[i].name;
-                var levelSub = subList[i].level;
-                var cityCode = subList[i].citycode;
-                contentSub = new Option(name);
-                contentSub.setAttribute("value", levelSub);
-                contentSub.center = subList[i].center;
-                contentSub.adcode = subList[i].adcode;
+        try {
+            var subList = data.districtList;
+            if (subList) {
+                var contentSub = new Option('--请选择--');
+                var curlevel = subList[0].level;
+                var curList = document.querySelector('#' + curlevel);
                 curList.add(contentSub);
+                for (var i = 0, l = subList.length; i < l; i++) {
+                    var name = subList[i].name;
+                    var levelSub = subList[i].level;
+                    var cityCode = subList[i].citycode;
+                    contentSub = new Option(name);
+                    contentSub.setAttribute("value", levelSub);
+                    contentSub.center = subList[i].center;
+                    contentSub.adcode = subList[i].adcode;
+                    curList.add(contentSub);
+                }
             }
+        }catch (e) {
+            console.log(e.message);
         }
     }
     function search(obj) {
@@ -237,7 +329,7 @@
         //按照adcode进行查询可以保证数据返回的唯一性
         district.search(adcode, function(status, result) {
             if(status === 'complete'){
-                getData(result.districtList[0],obj.id);
+                getData(result.districtList[0],obj.id,option.text);
             }
         });
     }
@@ -251,206 +343,195 @@
     var myChart_2 = echarts.init(document.getElementById('column_cs_2'));
     var myChart_3 = echarts.init(document.getElementById('column_cs_3'));
 
-    /*    // 指定图表的配置项和数据
-        var option = {
-            /!*            title: {
-                            text: '区域分析'
-                        },*!/
-            tooltip: {},
-            legend: {
-                data:['数据']
-            },
-            xAxis: {
-                data: ["经销商","零售商","种植大户"]
-            },
-            yAxis: {},
-            series: [{
-                name: '数据',
-                type: 'bar',
-                data: [5, 20, 36]
-            }]
-        };*/
-    option_1 = {
-        backgroundColor:null,//2c343c
+    function setoption1(option_1_value1data,option_1_value2data,option_1_value3data)
+    {
+        option_1 = {
+            backgroundColor:null,//2c343c
 
-        title: {
-            text: '区域信息',
-            left: 'center',
-            size: 50,
-            top: 20,
-            textStyle: {
-                color: '#ffffff'
-            }
-        },
-
-        tooltip : {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-
-        visualMap: {
-            show: false,
-            min: 80,
-            max: 600,
-            inRange: {
-                colorLightness: [0, 1]
-            }
-        },
-        series : [
-            {
-                name:'访问来源',
-                type:'pie',
-                radius : '55%',
-                center: ['50%', '50%'],
-                data:[
-                    {value:335, name:'经销商数据'},
-                    {value:310, name:'零售商数据'},
-                    {value:274, name:'种植大户数据'},
-                ].sort(function (a, b) { return a.value - b.value; }),
-                roseType: 'radius',
-                label: {
-                    normal: {
-                        textStyle: {
-                            color: 'rgba(255, 255, 255, 0.3)'
-                        }
-                    }
-                },
-                labelLine: {
-                    normal: {
-                        lineStyle: {
-                            color: 'rgba(255, 255, 255, 0.3)'
-                        },
-                        smooth: 0.2,
-                        length: 10,
-                        length2: 20
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: '#c23531',
-                        shadowBlur: 200,
-                        shadowColor: 'rgba(255,255,255,0.5)'
-                    }
-                },
-
-                animationType: 'scale',
-                animationEasing: 'elasticOut',
-                animationDelay: function (idx) {
-                    return Math.random() * 200;
+            title: {
+                text: '区域信息',
+                left: 'center',
+                size: 50,
+                top: 20,
+                textStyle: {
+                    color: '#ffffff'
                 }
-            }
-        ]
-    };
+            },
 
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
 
-    option_2 = {
-        color: ['#3398DB'],
-        tooltip : {
-            trigger: 'axis',
-            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis : [
-            {
-                type : 'category',
-                data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                axisTick: {
-                    alignWithLabel: true
+            visualMap: {
+                show: false,
+                min: 80,
+                max: 600,
+                inRange: {
+                    colorLightness: [0, 1]
                 }
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value'
-            }
-        ],
-        series : [
-            {
-                name:'直接访问',
-                type:'bar',
-                barWidth: '60%',
-                data:[10, 52, 200, 334, 390, 330, 220]
-            }
-        ]
-    };
-
-    option_3 = {
-        title: {
-            text: '漏斗图',
-            subtext: '纯属虚构'
-        },
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c}%"
-        },
-        toolbox: {
-            feature: {
-                dataView: {readOnly: false},
-                restore: {},
-                saveAsImage: {}
-            }
-        },
-        legend: {
-            data: ['展现','点击','访问','咨询','订单']
-        },
-        calculable: true,
-        series: [
-            {
-                name:'漏斗图',
-                type:'funnel',
-                left: '10%',
-                top: 60,
-                //x2: 80,
-                bottom: 60,
-                width: '80%',
-                // height: {totalHeight} - y - y2,
-                min: 0,
-                max: 100,
-                minSize: '0%',
-                maxSize: '100%',
-                sort: 'descending',
-                gap: 2,
-                label: {
-                    show: true,
-                    position: 'inside'
-                },
-                labelLine: {
-                    length: 10,
-                    lineStyle: {
-                        width: 1,
-                        type: 'solid'
-                    }
-                },
-                itemStyle: {
-                    borderColor: '#fff',
-                    borderWidth: 1
-                },
-                emphasis: {
+            },
+            series : [
+                {
+                    name:'区域信息',
+                    type:'pie',
+                    radius : '55%',
+                    center: ['50%', '50%'],
+                    data:[
+                        {value:option_1_value1data, name:'经销商数据'},
+                        {value:option_1_value2data, name:'零售商数据'},
+                        {value:option_1_value3data, name:'种植大户数据'},
+                    ].sort(function (a, b) { return a.value - b.value; }),
+                    roseType: 'radius',
                     label: {
-                        fontSize: 20
-                    }
-                },
-                data: [
-                    {value: 60, name: '访问'},
-                    {value: 40, name: '咨询'},
-                    {value: 20, name: '订单'},
-                    {value: 80, name: '点击'},
-                    {value: 100, name: '展现'}
-                ]
-            }
-        ]
-    };
+                        normal: {
+                            textStyle: {
+                                color: 'rgba(255, 255, 255, 0.3)'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            lineStyle: {
+                                color: 'rgba(255, 255, 255, 0.3)'
+                            },
+                            smooth: 0.2,
+                            length: 10,
+                            length2: 20
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#c23531',
+                            shadowBlur: 200,
+                            shadowColor: 'rgba(255,255,255,0.5)'
+                        }
+                    },
 
-    // 使用刚指定的配置项和数据显示图表。
-    myChart_1.setOption(option_1);
-    myChart_2.setOption(option_2);
-    myChart_3.setOption(option_3);
+                    animationType: 'scale',
+                    animationEasing: 'elasticOut',
+                    animationDelay: function (idx) {
+                        return Math.random() * 200;
+                    }
+                }
+            ]
+        };
+        myChart_1.setOption(option_1);
+    }
+
+    function setoption2(option_2_value1data,option_2_value2data)
+    {
+        option_2 = {
+            color: ['#3398DB'],
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['大田作物', '经济作物'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'(万吨)',
+                    type:'bar',
+                    barWidth: '60%',
+                    data:[option_2_value1data, option_2_value2data]
+                }
+            ]
+        };
+        myChart_2.setOption(option_2);
+    }
+
+    function setoption3(option_3_value1data,option_3_value2data,option_3_value3data)
+    {
+        option_3 = {
+            title: {
+                text: '区域信息漏斗图',
+                subtext: '区域信息'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+            toolbox: {
+                feature: {
+                    dataView: {readOnly: false},
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            legend: {
+                data: ['总面积','耕地面积','总人口']
+            },
+            calculable: true,
+            series: [
+                {
+                    name:'区域信息',
+                    type:'funnel',
+                    left: '10%',
+                    top: 60,
+                    //x2: 80,
+                    bottom: 60,
+                    width: '80%',
+                    // height: {totalHeight} - y - y2,
+                    min: 0,
+                    max: 100,
+                    minSize: '0%',
+                    maxSize: '100%',
+                    sort: 'descending',
+                    gap: 2,
+                    label: {
+                        show: true,
+                        position: 'inside'
+                    },
+                    labelLine: {
+                        length: 10,
+                        lineStyle: {
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+                    itemStyle: {
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    },
+                    emphasis: {
+                        label: {
+                            fontSize: 20
+                        }
+                    },
+                    data: [
+                        {value: option_3_value1data, name: '总面积'},
+                        {value: option_3_value2data, name: '耕地面积'},
+                        {value: option_3_value3data, name: '总人口'},
+                    ]
+                }
+            ]
+        };
+        myChart_3.setOption(option_3);
+    }
+
+
+
+
 </script>
 </html>
