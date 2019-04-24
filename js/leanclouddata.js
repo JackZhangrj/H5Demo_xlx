@@ -131,6 +131,10 @@ function add_addressdata(tablename,comparison,province,city,district, data) {
         todo.set('podatodata', data[11].value);//土豆
 
         todo.save().then(function (todo) {
+            for(var i=0;i<data.length;i++)
+            {
+                data[i].value="";
+            }
             // 成功保存之后，执行其他逻辑.
             console.log('New object created with objectId: ' + todo.id);
         }, function (error) {
@@ -159,6 +163,10 @@ function add_addressdata(tablename,comparison,province,city,district, data) {
         todo.set('podatodata', data[11].value);//土豆
 
         todo.save().then(function (todo) {
+            for(var i=0;i<data.length;i++)
+            {
+                data[i].value="";
+            }
             // 成功保存之后，执行其他逻辑.
             console.log('New object created with objectId: ' + todo.id);
         }, function (error) {
@@ -219,6 +227,10 @@ function add_merchantdata(tablename,comparison,province,city,district,lng,lat, d
         todo.save().then(function (todo) {
             // 成功保存之后，执行其他逻辑.
             console.log('New object created with objectId: ' + todo.id);
+            for(var i=0;i<data.length;i++)
+            {
+                data[i].value="";
+            }
         }, function (error) {
             // 异常处理
             console.error('Failed to create new object, with error message: ' + error.message);
@@ -248,6 +260,10 @@ function add_merchantdata(tablename,comparison,province,city,district,lng,lat, d
 
         todo.save().then(function (todo) {
             // 成功保存之后，执行其他逻辑.
+            for(var i=0;i<data.length;i++)
+            {
+                data[i].value="";
+            }
             console.log('New object created with objectId: ' + todo.id);
         }, function (error) {
             // 异常处理

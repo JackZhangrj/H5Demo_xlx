@@ -37,8 +37,8 @@
             <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/js/leanclouddata.js">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="290">
-                    <caret line="155" column="51" lean-forward="true" selection-start-line="155" selection-start-column="51" selection-end-line="155" selection-end-column="51" />
+                  <state relative-caret-position="609">
+                    <caret line="136" column="13" lean-forward="true" selection-start-line="136" selection-start-column="13" selection-end-line="136" selection-end-column="13" />
                   </state>
                 </provider>
               </entry>
@@ -143,8 +143,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/xlxhtml/navigation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1173">
-              <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+            <state relative-caret-position="414">
+              <caret line="87" column="12" lean-forward="true" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
               <folding>
                 <element signature="n#style#0;n#button#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -166,8 +166,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="85" column="9" lean-forward="true" selection-start-line="85" selection-start-column="9" selection-end-line="85" selection-end-column="9" />
+            <state relative-caret-position="575">
+              <caret line="25" column="9" lean-forward="true" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
               <folding>
                 <element signature="n#style#0;n#button#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -211,10 +211,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/xlxhtml/dataEntry.html">
+        <entry file="file://$PROJECT_DIR$/xlxhtml/dataentry.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="566">
-              <caret line="299" column="36" lean-forward="true" selection-start-line="299" selection-start-column="36" selection-end-line="299" selection-end-column="36" />
+            <state relative-caret-position="313">
+              <caret line="534" column="23" lean-forward="true" selection-start-line="534" selection-start-column="23" selection-end-line="534" selection-end-column="23" />
               <folding>
                 <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -269,14 +269,15 @@
         <option value="$PROJECT_DIR$/cshtml/aataEntry_1.html" />
         <option value="$PROJECT_DIR$/cshtml/111.html" />
         <option value="$PROJECT_DIR$/xlxhtml/DataEntry.html" />
-        <option value="$PROJECT_DIR$/js/leanclouddata.js" />
         <option value="$PROJECT_DIR$/cshtml/dataEntry_1.html" />
         <option value="$PROJECT_DIR$/cshtml/dataplatform_1.html" />
         <option value="$PROJECT_DIR$/xlxhtml/dataplatform_1.html" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/xlxhtml/navigation.html" />
         <option value="$PROJECT_DIR$/xlxhtml/dataplatform.html" />
         <option value="$PROJECT_DIR$/xlxhtml/dataEntry.html" />
+        <option value="$PROJECT_DIR$/xlxhtml/navigation.html" />
+        <option value="$PROJECT_DIR$/xlxhtml/dataentry.html" />
+        <option value="$PROJECT_DIR$/js/leanclouddata.js" />
       </list>
     </option>
   </component>
@@ -286,9 +287,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="846" />
-    <option name="y" value="110" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1100" />
+    <option name="y" value="325" />
     <option name="width" value="1700" />
     <option name="height" value="1200" />
   </component>
@@ -305,21 +306,6 @@
             <path>
               <item name="ZRJ_H5Demo_XLX" type="b2602c69:ProjectViewProjectNode" />
               <item name="ZRJ_H5Demo_XLX" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ZRJ_H5Demo_XLX" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ZRJ_H5Demo_XLX" type="462c0819:PsiDirectoryNode" />
-              <item name="cshtml" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ZRJ_H5Demo_XLX" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ZRJ_H5Demo_XLX" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ZRJ_H5Demo_XLX" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ZRJ_H5Demo_XLX" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ZRJ_H5Demo_XLX" type="b2602c69:ProjectViewProjectNode" />
@@ -392,18 +378,18 @@
       <workItem from="1555987136126" duration="20098000" />
       <workItem from="1556025752880" duration="10568000" />
       <workItem from="1556067695691" duration="31352000" />
-      <workItem from="1556108305853" duration="39442000" />
+      <workItem from="1556108305853" duration="41085000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="196078000" />
+    <option name="totallyTimeSpent" value="197721000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="846" y="110" width="1700" height="1200" extended-state="0" />
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18597561" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17011128" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="设计器" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -688,29 +674,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/leanclouddata.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="155" column="51" lean-forward="true" selection-start-line="155" selection-start-column="51" selection-end-line="155" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ZRJ_H5Demo_XLX.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
           <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xlxhtml/navigation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1173">
-          <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-          <folding>
-            <element signature="n#style#0;n#button#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -728,10 +695,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xlxhtml/dataEntry.html">
+    <entry file="file://$PROJECT_DIR$/js/leanclouddata.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="299" column="36" lean-forward="true" selection-start-line="299" selection-start-column="36" selection-end-line="299" selection-end-column="36" />
+        <state relative-caret-position="609">
+          <caret line="136" column="13" lean-forward="true" selection-start-line="136" selection-start-column="13" selection-end-line="136" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xlxhtml/dataentry.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="534" column="23" lean-forward="true" selection-start-line="534" selection-start-column="23" selection-end-line="534" selection-end-column="23" />
           <folding>
             <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -743,10 +717,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/xlxhtml/navigation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="87" column="12" lean-forward="true" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="85" column="9" lean-forward="true" selection-start-line="85" selection-start-column="9" selection-end-line="85" selection-end-column="9" />
+        <state relative-caret-position="575">
+          <caret line="25" column="9" lean-forward="true" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
           <folding>
             <element signature="n#style#0;n#button#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
