@@ -2,26 +2,125 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>汇利伟业大数据平台</title>
-    <script src="//libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+    <title>心连心大数据平台</title>
+<!--    <script src="//libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/bgcanvas.css">
-    <script type="text/javascript" src="../js/bgcanvas.js"></script>
+    <script type="text/javascript" src="../js/bgcanvas.js"></script>-->
+
+    <style>
+        div
+        {
+/*            border: 1px black solid;*/
+        }
+
+        span
+        {
+            color: white;
+        }
+
+        body
+        {
+            background-image: url(../img/bg_img.png);
+            background-size: cover;
+            z-index: 9999999999;
+        }
+
+        .total_div
+        {
+            width:1800px;
+            height: 900px ;
+            position:absolute;margin:0 auto;  left:0; right:0; top:5%;
+        }
+
+        .title_div
+        {
+            position: absolute;
+            top: 15%;
+            width: 100%;
+            height: 20%;
+            text-align: center;
+        }
+
+/*        .title_div .title_span_div
+        {
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 50%;
+
+        }*/
+
+        .title_div span
+        {
+            font-size: 5rem;
+        }
+
+        .body_button_div
+        {
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 22%;
+            height: 50%;
+            margin: 0 auto;
+            bottom: 5rem;
+        }
+
+        .body_button_div .button_div
+        {
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+            width: 100%;
+            height: 17%;
+        }
+
+        .button_div button
+        {
+            font-size: 2.3rem;
+            color: white;
+            text-align: center;
+            border: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
 </head>
 <body>
-<div>
     <canvas width="1920" height="1080"></canvas>
-    <div style=" text-align:center;font-size: 90px; width: 100%; position: absolute;margin-top:10%;" >
-        <span style="color: white; font-family:SimHei;">汇利伟业大数据平台</span>
+    <div class="total_div">
+        <div class="title_div">
+           <span>心连心大数据平台</span>
+        </div>
+        <div class="body_button_div">
+            <div class="button_div">
+                <button style="background: url(../img/maxbutton_img.png)no-repeat;background-size: 100% 100%" onmouseover="maxbutton_over(this)" onmouseout="maxbutton_out(this)"
+                onclick="location.href='../xlxhtml/dataplatform.html'">大数据平台</button>
+            </div>
+            <div class="button_div">
+                <button style="background: url(../img/maxbutton_img.png)no-repeat;background-size: 100% 100%" onmouseover="maxbutton_over(this)" onmouseout="maxbutton_out(this)"
+                        onclick="location.href='../xlxhtml/dataEntry.html'">后台数据录入</button>
+            </div>
+            <div class="button_div">
+                <button style="background: url(../img/maxbutton_img.png)no-repeat;background-size: 100% 100%" onmouseover="maxbutton_over(this)" onmouseout="maxbutton_out(this)"
+                        onclick="location.href='../index.html'">退出</button>
+            </div>
+        </div>
     </div>
-
-    <div style="position: absolute; text-align:center;top:50%; width: 100%;";>
-        <button style="font-size: 25px;  width: 30%;height: 100px; " onclick="location.href='../xlxhtml/dataplatform.html'"/>大数据平台</button>
-        <br>   <br>
-        <button style="font-size: 25px;  width: 30%;height: 100px; " onclick="location.href='../xlxhtml/DataEntry.html'"/>后台数据录入</button>
-        <br>   <br>
-        <button style="font-size: 25px; width: 30%;height: 100px; " onclick="location.href='../index.html'"/>退出</button>
-    </div>
-</div>
 
 </body>
+<script type="text/javascript">
+    function maxbutton_over(obj) {
+        obj.style.backgroundImage="url(../img/maxbuttonover_img.png)";
+        obj.style.backgroundRepeat = "no-repeat";
+        obj.style.backgroundSize="100% 100%";
+    }
+
+    function  maxbutton_out(obj) {
+        obj.style.backgroundImage="url(../img/maxbutton_img.png)";
+        obj.style.backgroundRepeat = "no-repeat";
+        obj.style.backgroundSize="100% 100%";
+    }
+</script>
 </html>

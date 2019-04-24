@@ -1,16 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
+<!--    <base href="//webapi.amap.com/ui/1.0/ui/overlay/SimpleInfoWindow/examples/" />-->
     <meta charset="UTF-8">
-    <title>汇利伟业大数据平台</title>
+    <title>心连心大数据平台</title>
     <script src="//libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/bgcanvas.css">
     <script type="text/javascript" src="../js/bgcanvas.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../css/selectFilter.css" />
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/selectFilter.js"></script>
 
     <script type="text/javascript" src="//webapi.amap.com/maps?v=1.4.14&key=35380e9ca7fbd13031eb6a6bb9021581&plugin=AMap.DistrictSearch"></script><!--高德地图-->
     <script src="../js/gdmap.js"></script>
     <script type="text/javascript" src="//webapi.amap.com/demos/js/liteToolbar.js"></script>
     <link rel="stylesheet" href="//a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <script src="//webapi.amap.com/loca?key=35380e9ca7fbd13031eb6a6bb9021581&v=1.2.0"></script>
+    <script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
 
     <script src="//echarts.baidu.com/build/dist/echarts-all.js"></script>
     <script type="text/javascript" src="//echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
@@ -25,233 +32,943 @@
 
     <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.13.0/dist/av-live-query-min.js"></script>
     <script src="../js/leanclouddata.js"></script>
+
+    <style>
+        .total_div
+        {
+            width:1800px;
+            height: 900px ;
+            position:absolute;margin:0 auto;  left:0; right:0; top:5%;
+        }
+
+        div
+        {
+ /*           border: 1px black solid;*/
+        }
+
+        div span
+        {
+            color: white;
+            white-space:nowrap;
+        }
+
+        button
+        {
+            color: white;
+            border:0;
+            background: none;
+        }
+
+        .titla_div
+        {
+            height: 7%;
+            width:100%;
+            text-align: center;
+        }
+
+        .titla_text_div
+        {
+            top: 1%;
+            font-size: 2rem;
+        }
+
+        .total_data
+        {
+            height: 5%;
+            width:100%;
+            text-align: center;
+            transform:translateY(25%);
+        }
+
+        .total_data span
+        {
+            text-align: center;
+            margin-left: 2rem;
+            margin-right: 2rem;
+            font-size: 1.2rem;
+            height: 100%;
+
+        }
+
+        .absolute_center_div
+        {
+            position: absolute;
+            left: 0;
+            right: 0;
+        }
+
+        .return_button_style
+        {
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            height: 5%;
+            width:6%;
+            font-size: 1.3rem;
+            z-index: 100;
+/*            bottom: 0;*/
+        }
+
+        .dropdown_div
+        {
+            width: 23%;
+            height: 27%;
+            position: absolute;
+            margin:0 auto;  left:0;
+/*            display: inline-block;*/
+/*            display: -webkit-flex;
+            display: flex;
+            -webkit-justify-content: space-between;
+            justify-content:space-between;*/
+        }
+
+         .sontitle_text_div /*.dropdown_div*/
+        {
+            position: absolute;
+            left: 2rem;
+            top: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .dropdown_div .drop_div
+        {
+            position:absolute;
+            margin:0 auto;
+            left:9%;
+            right:0;
+            top: 30%;
+            width: 90%;
+            height: 60%;
+        }
+
+        .drop_div .drop_item_div
+        {
+            margin-bottom: 1rem;
+        }
+
+        .drop_item_title_div
+        {
+            width: 25%;
+            font-size: 1.5rem;
+            display: inline-block;
+            text-align: center;
+            height: 100%;
+            transform:translateY(10%);
+        }
+
+        .drop_item_title_div span
+        {
+            color: #1a67e9;
+        }
+
+        .drop_item_control_div
+        {
+            width: 60%;
+            font-size: 1.3rem;
+            display: inline-block;
+            right: 0;
+        }
+
+        .drop_item_control_div select
+        {
+            width: 100%;
+            height: 2.7rem;
+            background:none;
+            border: 1px #1a67e9 solid;
+            margin-top: 0;
+/*            scrollbar-3dlight-color: black;*/
+/*            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance:none;*/
+        }
+
+/*        !*定义滚动条高宽及背景
+ 高宽分别对应横竖滚动条的尺寸*!
+        select::-webkit-scrollbar
+        {
+            width:16px;
+            height:16px;
+            background-color: #001bf5;
+        }
+
+        select::-webkit-scrollbar-button
+        {
+            display: none;
+        }*/
+
+/*        select:focus {
+            border: 1px solid #9bd7e0;
+            box-shadow:#3ec1e5 0px 0px 6px;
+        }*/
+
+/*        .drop_item_control_div select option:hover
+        {
+            background-color: blue;
+            color: white;
+            scrollbar-track-color: black;
+        }*/
+
+        .map_div
+        {
+            width: 52%;
+            height: 61%;
+            position: absolute;
+            margin:0 auto;  left:0;right: 0;
+        }
+
+        .map_text_div
+        {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            margin-top: 1rem;
+            width: 30%;
+            height: 50%;
+            z-index: 100;
+            color: white;
+        }
+
+        .chart_data1_div
+        {
+            width: 23%;
+            height: 50%;
+            position: absolute;
+            margin:0 auto;  right: 0;
+        }
+
+        .chart_data1_div .chart_data1
+        {
+            width: 90%;
+            height: 90%;
+            position: absolute;
+            margin:0 auto;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .chart_data2_div
+        {
+            width: 23%;
+            height: 35%;
+            position: absolute;
+            margin:0 auto;  right: 0;bottom: 0;
+        }
+
+        .chart_data2_div .chart_data2
+        {
+            width: 80%;
+            height: 80%;
+            position: absolute;
+            margin:0 auto;
+            left: 0;
+            right: 0;
+            bottom: 2rem;
+        }
+
+        .chart_data3_div
+        {
+            width: 39%;
+            height: 24%;
+            position: absolute;
+            margin:0 auto;  left:13%;right: 0; bottom: 0;
+        }
+
+        .chart_data3_div .chart_data3
+        {
+            width: 90%;
+            height: 90%;
+            position: absolute;
+            margin:0 auto;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transform:translateY(10%);
+        }
+
+        .button_information_div
+        {
+            width: 36%;
+            height: 58%;
+            position: absolute;
+            margin:0 auto;  left:0; bottom: 0px;
+        }
+
+        .button_information_div .button_area1_div
+        {
+            position: absolute;
+            width: 55%;
+            height: 40%;
+            left: 5%;
+            top: 14%
+        }
+
+        .button_information_div .button_area2_div
+        {
+            position: absolute;
+            width: 55%;
+            height: 27%;
+            left: 5%;
+            bottom: 2%;
+        }
+
+        .button_information_div .button_area3_div
+        {
+            position: absolute;
+            width: 30%;
+            height: 27%;
+            right: 4%;
+            bottom: 2%;
+        }
+
+        .button_information_div .button1_style
+        {
+            width: 40%;
+            height: 25%;
+            margin-bottom: 1.5rem;
+            margin-left: 1.5rem;
+        }
+
+        .button_information_div .button2_style
+        {
+            width: 40%;
+            height: 37%;
+            margin-bottom: 1.5rem;
+            margin-left: 1.5rem;
+        }
+
+        .button_information_div .button3_style
+        {
+            width: 73%;
+            height: 37.3%;
+            margin-bottom: 1.5rem;
+            margin-left: 1.5rem;
+        }
+
+        .button_information_div .sontitle2_text_div /*.dropdown_div*/
+        {
+            position: absolute;
+            left: 0rem;
+            top: -3rem;
+            font-size: 1.2rem;
+        }
+
+        .button_information_div .sontitle3_text_div /*.dropdown_div*/
+        {
+            position: absolute;
+            left: 0rem;
+            top: -3rem;
+            font-size: 1.2rem;
+        }
+
+
+    </style>
 </head>
 <body>
     <canvas width="1920" height="1080"></canvas>
-<!--    <div style=" text-align:center;font-size: 100px; width: 100%; position: absolute;top:10%;" >
-        <span style="color: white; font-family:SimHei;">汇利伟业大数据平台控制台</span>
-    </div>-->
-
-    <div style="width: 100%;height: 100%;color: white;"> <!--border:1px solid;-->
-        <div style="width: 100%;height: 150px;"><!--border:1px solid;-->
-            <div style="width: 100%;height: 40px">
-
+    <div class="total_div">
+        <div class="titla_div">
+            <button class="return_button_style" style="background: url(../img/return_img.png)no-repeat;background-size: 100% 100%;"
+                    onclick="location.href='../xlxhtml/navigation.html'" onmouseover="returnbutton_over(this)" onmouseout="returnbutton_out(this)">返回</button>
+            <img src="../img/title_img.png" height="100%"  >
+            <span class="absolute_center_div titla_text_div">心连心大数据平台</span>
+        </div>
+        <div class="total_data">
+            <span id="total_data_sales"></span>
+            <span id="total_data_salesof"></span>
+            <span id="total_data_channelsof"></span>
+            <span id="total_data_plantinglargeof"></span>
+        </div>
+        <div class="dropdown_div" style="background:url(../img/dropdownback_img.png) no-repeat;background-size: 100% 100%;"><!--background-repeat : repeat-y;-->
+            <div class="sontitle_text_div"><img src="../img/sontitle_img.png"> <span>区域选择</span></div>
+            <div class="drop_div">
+                <div class="drop_item_div">
+                    <div class="drop_item_title_div">
+                        <span>省市区</span>
+                    </div>
+                    <div class="drop_item_control_div">
+                        <select id="province" onchange='search(this)'></select>
+                    </div>
+                </div>
+                <div class="drop_item_div">
+                    <div class="drop_item_title_div">
+                        <span>地级市</span>
+                    </div>
+                    <div class="drop_item_control_div">
+                        <select id="city" onchange='search(this)'></select>
+                    </div>
+                </div>
+                <div class="drop_item_div">
+                    <div class="drop_item_title_div">
+                        <span>区级县</span>
+                    </div>
+                    <div class="drop_item_control_div">
+                        <select id="district" onchange='search(this)'></select>
+                    </div>
+                </div>
             </div>
-            <div style=" text-align:center;font-size: 50px; width: 100%;" >
-                <span style="color: white; font-family:SimHei;margin-top: 25px;">汇利伟业大数据平台控制台</span>
+
+        </div>
+        <div id="container"  class="map_div">
+            <div class="map_div map_text_div"><p id="container_text"></p></div>
+        </div>
+        <div class="button_information_div"  style="background:url(../img/buttonback_img.png)no-repeat;background-size: 100% 100%;">
+            <div class="sontitle_text_div"><img src="../img/sontitle_img.png">  <span>区域信息</span> </div>
+            <div class="button_area1_div">
+                <button class="button1_style" style="background: url(../img/bluebutton_img.png)no-repeat;background-size: 100% 100%;" onmouseover="bluebutton_over(this)" onmouseout="bluebutton_out(this)"
+                onclick="dealerdata_onclick()">经销商基本信息</button>
+                <button class="button1_style" style="background: url(../img/yellowbutton_img.png)no-repeat;background-size: 100% 100%;" onmouseover="yelllowbutton_over(this)" onmouseout="yelllowbutton_out(this)"
+                onclick="plantation_onclick()">种植结构分布</button>
+                <button class="button1_style" style="background: url(../img/purplebutton_img.png)no-repeat;background-size: 100% 100%;" onmouseover="purplebutton_over(this)" onmouseout="purplebutton_out(this)"
+                onclick="basicmarket_onclick()">市场基本信息</button>
+                <button class="button1_style" style="background: url(../img/greenbutton_img.png)no-repeat;background-size: 100% 100%;" onmouseover="greenbutton_over(this)" onmouseout="greenbutton_out(this)"
+                onclick="soilregime_onclick()">土壤情况</button>
+                <button class="button1_style" style="background: url(../img/yellowbutton_img.png)no-repeat;background-size: 100% 100%;" onmouseover="yelllowbutton_over(this)" onmouseout="yelllowbutton_out(this)"
+                onclick="shopkeeperdata_onclick()">零售网点</button>
+                <button class="button1_style" style="background: url(../img/bluebutton_img.png)no-repeat;background-size: 100% 100%;" onmouseover="bluebutton_over(this)" onmouseout="bluebutton_out(this)"
+                onclick="plantinglargedata_onclick()">种植大户</button>
+            </div>
+            <div class="button_area2_div">
+                <div class="sontitle2_text_div"><img src="../img/sontitle_img.png">  <span>服务及行业信息</span> </div>
+                <button class="button2_style" style="background: url(../img/bluebutton_img.png)no-repeat;background-size: 100% 100%;" onmouseover="bluebutton_over(this)" onmouseout="bluebutton_out(this)"
+                onclick="agricultural_onclock()">农业服务</button>
+                <button class="button2_style" style="background: url(../img/yellowbutton_img.png)no-repeat;background-size: 100% 100%;" onmouseover="yelllowbutton_over(this)" onmouseout="yelllowbutton_out(this)"
+                onclick="industryf_onclick()">行业咨询</button>
+                <button class="button2_style" style="background: url(../img/purplebutton_img.png)no-repeat;background-size: 100% 100%;" onmouseover="purplebutton_over(this)" onmouseout="purplebutton_out(this)"
+                onclick="cheats_onclick()">农机宝典</button>
+            </div>
+            <div class="button_area3_div">
+                <div class="sontitle3_text_div"><img src="../img/sontitle_img.png">  <span>分析建议</span> </div>
+                <button class="button3_style" style="background: url(../img/bluebutton_img.png)no-repeat;background-size: 100% 100%;" onmouseover="bluebutton_over(this)" onmouseout="bluebutton_out(this)"
+                onclick="regional_onclick()">区域分析</button>
+                <button class="button3_style" style="background: url(../img/yellowbutton_img.png)no-repeat;background-size: 100% 100%;" onmouseover="yelllowbutton_over(this)" onmouseout="yelllowbutton_out(this)"
+                onclick="guide_onclick()">指导建议</button>
             </div>
         </div>
-        <div  style="width: 100%;height: 750px;">
-            <div style="width: 25%;float: left;">
-                <div>
-                    <div style="width: 100%;text-align:center;height: 40px;" >
-                        <span style="font-size: 25px;width: 20%;height: 40px;">区域选择</span>
-                    </div>
-                    <br>
-                    <div style="width: 100%; clear:both;">
-                        <div style="width: 40%;float: left;text-align:right;" >
-                            <span style="height: 25px;font-size: 20px">省市区</span>
-                        </div>
-                        <div style="width: 40%;float: left;" class="input-item ">
-                            <select id='province' style="left: 10px;width:100px;height: 25px;" onchange='search(this)'></select>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <div style="width: 100%; clear:both;">
-                        <div style="width: 40%;float: left;text-align:right;">
-                            <span style="height: 25px;font-size: 20px">地级市</span>
-                        </div>
-                        <div style="width: 40%;float: left;" class="input-item">
-                            <select id='city' style="left: 10px; width:100px;height: 25px;" onchange='search(this)'></select>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <div style="width: 100% ;clear:both;">
-                        <div style="width: 40%;float: left;text-align:right">
-                            <span style="height: 25px;font-size: 20px">区级县</span>
-                        </div>
-                        <div style="width: 40%;float: left;" class="input-item">
-                            <select id='district' style="left: 10px;width:100px;height: 25px;" class="input-item-prepend" onchange='search(this)'></select>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                </div>
-                <br>
-                <div style="clear:both; ">
-                    <div style="width: 100%;text-align:center;height: 40px;">
-                        <span style="font-size: 25px;width: 20%;height: 40px;">区域信息</span>
-                    </div>
-                    <br>
-                    <div style="width: 100%;height: 100%;text-align:center;font-size: 20px">
-                        <p id="poptotaltext"></p>     <br>
-                        <p id="areatotaltext"></p>     <br>
-                        <p id="ploughtotaltext"></p>     <br>
-                        <p id="fieldcropsdatatext"></p>     <br>
-                        <p id="cashcropdatatext"></p>     <br>
-                        <p id="dealerdatatext"></p>     <br>
-                        <p id="shopkeeperdatatext"></p>     <br>
-                        <p id="plantinglargedatatext"></p>     <br>
-                    </div>
-                </div>
-            </div>
-            <div id="container" style="width: 50%;float: left;height: 100%;">
-
-            </div>
-            <div style="width: 25%;float: left;">
-                <div style="width: 100%;text-align:center;height: 40px;">
-                    <span style="font-size: 25px;width: 20%;height: 40px;">服务及行业信息</span>
-                </div>
-                <br>
-                <div style="width: 100%;text-align: center;font-size: 20px;">
-                    <div style="width: 100%;height: 100%; text-align:center;bottom: 0px; font-size: 20px;overflow: hidden;">
-                        <button style="position: relative; width: 30%;height: 40px; " onclick="">农化服务</button><br><br>
-                    </div>
-                    <div style="width: 100%;height: 100%; text-align:center;bottom: 0px; font-size: 20px;overflow: hidden;">
-                        <button style="position: relative; width: 30%;height: 40px; " onclick="">行业资讯</button><br><br>
-                    </div>
-                    <div style="width: 100%;height: 100%; text-align:center;bottom: 0px; font-size: 20px;overflow: hidden;">
-                        <button style="position: relative; width: 30%;height: 40px; " onclick="">农机宝典</button><br><br>
-                    </div>
-                </div>
-                <br>
-                <div style="width: 100%;text-align:center;height: 40px;">
-                    <span style="font-size: 25px;width: 20%;height: 40px;">区域分析</span>
-                </div>
-                <br>
-                <div style="width: 100%;text-align: center;font-size: 20px">
-                    <p id="regionaltext"></p>
-                </div>
-                <br>
-                <br>
-                <div style="width: 100%;text-align:center;height: 40px;">
-                    <span style="font-size: 25px;width: 20%;height: 40px;">指导建议</span>
-                </div>
-                <br>
-                <div style="width: 100%;text-align: center;font-size: 20px;">
-                    <p id="suggesttext"></p>
-                    <p id="suggesttext_2"></p>
-                </div>
-
-            </div>
+        <div class="chart_data1_div" style="background:url(../img/chartback1_img.png)no-repeat;background-size: 100% 100%;">
+            <div class="sontitle_text_div"><img src="../img/sontitle_img.png">  <span>年产量</span> </div>
+            <div id="chart_data1" class="chart_data1"></div>
         </div>
-        <div style="width: 100%;height: 25%;">
-            <div style="width: 100%;height: 100px;">
-                <div style="width: 100%;height: 100%; text-align:center;bottom: 0px; font-size: 20px;overflow: hidden;">
-                    <button style="position: relative; width: 30%;height: 40px; " onclick="location.href='../xlxhtml/navigation.html'">返回</button><br><br>
-                </div>
-            </div>
-            <div id="column_cs_1" style="width: 33.33%;height: 250px;float: left; ">
-
-            </div>
-            <div id="column_cs_2" style="width: 33.33%;height: 250px;float: left;">
-
-            </div>
-            <div id="column_cs_3" style="width: 33.33%;height: 250px;float: left;">
-
-            </div>
-
+        <div class="chart_data2_div" style="background:url(../img/chartback2_img.png)no-repeat;background-size: 100% 100%;">
+            <div class="sontitle_text_div"><img src="../img/sontitle_img.png">  <span>区域信息</span> </div>
+            <div id="chart_data2" class="chart_data2"></div>
+        </div>
+        <div class="chart_data3_div" style="background:url(../img/chartback3_img.png)no-repeat;background-size: 100% 100%;">
+            <div class="sontitle_text_div"><img src="../img/sontitle_img.png">  <span>未来几天天气预报</span> </div>
+            <div id="chart_data3" class="chart_data3"></div>
         </div>
     </div>
+
 </body>
-<script>
-    var poptotaltext = document.getElementById('poptotaltext');
-    var areatotaltext = document.getElementById('areatotaltext');
-    var ploughtotaltext = document.getElementById('ploughtotaltext');
-    var fieldcropsdatatext = document.getElementById('fieldcropsdatatext');
-    var cashcropdatatext = document.getElementById('cashcropdatatext');
-    var dealerdatatext = document.getElementById('dealerdatatext');
-    var shopkeeperdatatext = document.getElementById('shopkeeperdatatext');
-    var plantinglargedatatext = document.getElementById('plantinglargedatatext');
 
-    var regionaltext = document.getElementById('regionaltext');
-    var suggesttext = document.getElementById('suggesttext');
-    var suggesttext_2 = document.getElementById('suggesttext_2');
+<script type="text/javascript">
+    var containertext =document.getElementById('container_text');
+    var total_data_sales = document.getElementById('total_data_sales');
+    var total_data_salesof = document.getElementById('total_data_salesof');
+    var total_data_channelsof = document.getElementById('total_data_channelsof');
+    var total_data_plantinglargeof = document.getElementById('total_data_plantinglargeof');
 
-    window.onload=function()
-    {
-        starttextdata();
+    var address_data;//地域信息缓存
+    var dealer_data;//经销商数据缓存
+    var shopkeeper_data;//零售商数据缓存
+    var plantinglarge_data;//种植大户数据缓存
+
+    window.onload=function () {
+        settotal_data_sales("--");
+        settotal_data_salesof("--");
+        settotal_data_channelsof("--");
+        settotal_data_plantinglargeof("--");
         setoption1(100,100,100);
-        setoption2(100,100);
-        setoption3(100,80,50);
+        setoption2(100,90,80,70,60,50,40,30,20);
+
+
+        //加载天气查询插件
+        AMap.plugin('AMap.Weather', function() {
+            //创建天气查询实例
+            weather = new AMap.Weather();
+            weather.getForecast("北京", function(err, data) {
+                console.log(err, data.forecasts);
+                setoption3("北京", data.forecasts);
+            });
+        })
     }
 
-    function starttextdata()
-    {
-        poptotaltext.innerHTML="总人口(万)：暂无数据";
-        areatotaltext.innerHTML="总面积(公里)：暂无数据";
-        ploughtotaltext.innerHTML="耕地面积(万亩)：暂无数据";
-        fieldcropsdatatext.innerHTML="大田作物(万吨)：暂无数据";
-        cashcropdatatext.innerHTML="经济作物(万吨)：暂无数据";
-        dealerdatatext.innerHTML="经销商数量(个)：暂无数据";
-        shopkeeperdatatext.innerHTML="零售商数量(个)：暂无数据";
-        plantinglargedatatext.innerHTML="种植大户数量(个)：暂无数据";
-        regionaltext.innerHTML="暂无";
-        suggesttext.innerHTML="暂无";
-        suggesttext_2.innerHTML="";
+    function dataclear() {
+        settotal_data_sales("--");
+        settotal_data_salesof("--");
+        settotal_data_channelsof("--");
+        settotal_data_plantinglargeof("--");
+        setoption1(100,100,100);
+        setoption2(100,90,80,70,60,50,40,30,20);
+        setcontainertext("");
+        address_data=null;
+        dealer_data=[];
+        shopkeeper_data=[];
+        plantinglarge_data=[];
+        markersclear();
     }
-
-/*    var Todo = AV.Object.extend('Todo');
-    var Query=new AV.Query("Todo");*/
 
     function settextdata(district) {
-        // 新建一个 Todo 对象
         console.log(district);
-        Query.equalTo('district', district);
-
-        Query.find().then(function(results) {
+        var index=0;
+/*        var Todo = AV.Object.extend(type);*/
+        var Query_1 = new AV.Query("address");
+        Query_1.equalTo('district', district);
+        Query_1.find().then(function(results) {
             // 返回一个符合条件的 list
             if(results.length!=0)
             {
                 console.log("数据库中有该数据");
                 var obj = results[0];
                 console.log(obj.attributes);
-                poptotaltext.innerHTML="总人口(万)："+obj.get("poptotal");
-                areatotaltext.innerHTML="总面积(公里)："+obj.get("areatotal");
-                ploughtotaltext.innerHTML="耕地面积(万亩)："+obj.get("ploughtotal");
-                fieldcropsdatatext.innerHTML="大田作物(万吨)："+obj.get("fieldcropsdata");
-                cashcropdatatext.innerHTML="经济作物(万吨)："+obj.get("cashcropdata");
-                dealerdatatext.innerHTML="经销商数量(个)："+obj.get("dealerdata");
-                shopkeeperdatatext.innerHTML="零售商数量(个)："+obj.get("shopkeeperdata");
-                plantinglargedatatext.innerHTML="种植大户数量(个)："+obj.get("plantinglargedata");
-                regionaltext.innerHTML=district +"耕地面积占总面积:"+Math.ceil(parseInt(obj.get("ploughtotal"))/parseInt(obj.get("areatotal"))*100)+"%";
-                var math_1=(obj.get("shopkeeperdata")/obj.get("dealerdata")).toFixed(2);
-                var math_text= math_1>1?"小":"大";
-                suggesttext.innerHTML="本地区经销商：零售商 = 1："+math_1;
-                suggesttext_2.innerHTML="市场潜力："+math_text;
-                setoption1(obj.get("dealerdata"),obj.get("shopkeeperdata"),obj.get("plantinglargedata"));
-                setoption2(obj.get("fieldcropsdata"),obj.get("cashcropdata"));
-                setoption3(obj.get("areatotal"),obj.get("ploughtotal"),obj.get("poptotal"));
-            }
-            else
-            {
-                starttextdata();
-                console.log("数据库中无该数据");
-                setoption1(100,100,100);
-                setoption2(100,100);
-                setoption3(100,80,50);
+                address_data=obj;
+                setoption2(obj.get("wheatdata"),obj.get("maizedata"),obj.get("ricedata"),obj.get("peanutdata"),obj.get("oilseeddata"),obj.get("sorghumdata"),obj.get("cottondata"),obj.get("soybeandata"),obj.get("podatodata"));
             }
         }).catch(function(error) {
             // catch 方法写在 Promise 链式的最后，可以捕捉到全部 error
             console.log(error);
         });
+
+        var Query_2 = new AV.Query("dealer");
+        Query_2.equalTo('district', district);
+        Query_2.find().then(function(results) {
+            // 返回一个符合条件的 list
+            if(results.length!=0)
+            {
+                console.log("数据库中有该数据");
+                var obj = results[0];
+                console.log(obj.attributes);
+                dealer_data=results;
+            }else
+                {
+                    dealer_data=[];
+                }
+            setmarchant_data(index+=1);
+        }).catch(function(error) {
+            // catch 方法写在 Promise 链式的最后，可以捕捉到全部 error
+            console.log(error);
+            dealer_data=[];
+            setmarchant_data(index+=1);
+        });
+
+        var Query_3 = new AV.Query("shopkeeper");
+        Query_3.equalTo('district', district);
+        Query_3.find().then(function(results) {
+            // 返回一个符合条件的 list
+            if(results.length!=0)
+            {
+                console.log("数据库中有该数据");
+                var obj = results[0];
+                console.log(obj.attributes);
+                shopkeeper_data=results;
+
+            }else
+                {
+                    shopkeeper_data=[];
+                }
+            setmarchant_data(index+=1);
+        }).catch(function(error) {
+            // catch 方法写在 Promise 链式的最后，可以捕捉到全部 error
+            console.log(error);
+            shopkeeper_data=[];
+            setmarchant_data(index+=1);
+        });
+
+        var Query_4 = new AV.Query("plantinglarge");
+        Query_4.equalTo('district', district);
+        Query_4.find().then(function(results) {
+            // 返回一个符合条件的 list
+            if(results.length!=0)
+            {
+                console.log("数据库中有该数据");
+                var obj = results[0];
+                console.log(obj.attributes);
+                plantinglarge_data=results;
+
+            }else
+                {
+                    plantinglarge_data=[];
+                }
+            setmarchant_data(index+=1);
+        }).catch(function(error) {
+            // catch 方法写在 Promise 链式的最后，可以捕捉到全部 error
+            console.log(error);
+            plantinglarge_data=[];
+            setmarchant_data(index+=1);
+        });
     }
+    
+    function setmarchant_data(index) {
+        if(index<3)
+            return;
+
+        setoption1(dealer_data.length,shopkeeper_data.length,plantinglarge_data.length);
+
+        var proportion_1=(plantinglarge_data.length/(dealer_data.length+shopkeeper_data.length+plantinglarge_data.length)*100).toFixed(2);
+        settotal_data_plantinglargeof(proportion_1);
+
+        var proportion_2=(shopkeeper_data.length/(dealer_data.length+shopkeeper_data.length+plantinglarge_data.length)*100).toFixed(2);
+        settotal_data_channelsof(proportion_2);
+
+        var proportion_3=(dealer_data.length/(dealer_data.length+shopkeeper_data.length+plantinglarge_data.length)*100).toFixed(2);
+        settotal_data_salesof(proportion_3);
+
+        var totalsales=0;
+        for(var i=0;i<dealer_data.length;i++)
+        {
+            totalsales+=(parseInt(dealer_data[i].get("xinlianxinmarket")) +parseInt(dealer_data[i].get("woliwomarket"))+parseInt(dealer_data[i].get("shoulashoumarket"))+parseInt(dealer_data[i].get("zefengmarket"))+parseInt(dealer_data[i].get("shidanglimarket"))+parseInt(dealer_data[i].get("sangningmarkket")));
+        }
+
+        for(var i=0;i<shopkeeper_data.length;i++)
+        {
+            totalsales+=(parseInt(shopkeeper_data[i].get("xinlianxinmarket"))+parseInt(shopkeeper_data[i].get("woliwomarket"))+parseInt(shopkeeper_data[i].get("shoulashoumarket"))+parseInt(shopkeeper_data[i].get("zefengmarket"))+ parseInt(shopkeeper_data[i].get("shidanglimarket"))+ parseInt(shopkeeper_data[i].get("sangningmarkket")));
+        }
+
+        for(var i=0;i<plantinglarge_data.length;i++)
+        {
+            totalsales+=(parseInt(plantinglarge_data[i].get("xinlianxinmarket"))+parseInt(plantinglarge_data[i].get("woliwomarket"))+parseInt(plantinglarge_data[i].get("shoulashoumarket"))+parseInt(plantinglarge_data[i].get("zefengmarket"))+ parseInt(plantinglarge_data[i].get("shidanglimarket"))+  parseInt(plantinglarge_data[i].get("sangningmarkket")));
+        }
+
+        settotal_data_sales(totalsales);
+    }
+
+    //设置地图浮层信息展示文本
+    function setcontainertext(text) {
+        containertext.innerHTML=text;
+    }
+
+    //设置销量文本,吨
+    function  settotal_data_sales(text) {
+        total_data_sales.innerHTML="销量："+ text +"吨";
+    }
+
+    //设置销量占有率文本，百分比
+    function settotal_data_salesof(text) {
+        total_data_salesof.innerHTML="销量占有率："+ text+"%";
+    }
+
+    //设置渠道占有率文本，百分比
+    function settotal_data_channelsof(text) {
+        total_data_channelsof.innerHTML="渠道占有率："+ text+"%";
+    }
+
+    //设置种植大户占比文本，百分比
+    function settotal_data_plantinglargeof(text) {
+        total_data_plantinglargeof.innerHTML="种植大户占比:"+text+"%";
+    }
+
+    //经销商基本信息按钮点击事件
+    function dealerdata_onclick() {
+        setcontainertext("");
+        markersclear();
+        for(var i=0;i<dealer_data.length;i++)
+        {
+            LoadSimpleInfoWindow("经销商:"+dealer_data[i].get('name'),[parseFloat(dealer_data[i].get('lng')),parseFloat(dealer_data[i].get('lat'))],
+               "车辆:"+dealer_data[i].get('cars')+"辆;"+'<br/>'
+                +"存储:"+dealer_data[i].get('storage')+"吨;"+'<br/>'
+                +"小麦销售:"+dealer_data[i].get('wheatmarket')+"斤;"+'<br/>'
+                +"花生销量:"+dealer_data[i].get('peanutmarket')+'斤'+'<br/>'
+                + "心连心销量:"+ dealer_data[i].get('xinlianxinmarket')+"吨;"+'<br/>'
+                +"沃利沃销售:"+dealer_data[i].get('woliwomarket')+"吨;"+'<br/>'
+            +"手拉手销售:"+dealer_data[i].get('shoulashoumarket')+"吨"+'<br/>'
+            +"泽丰销售:"+dealer_data[i].get('zefengmarket')+"吨"+'<br/>'
+            +"史丹利销售"+dealer_data[i].get('shidanglimarket')+"吨"+'<br/>'
+            +"三宁销售"+dealer_data[i].get('sangningmarkket')+"吨");
+        }
+    }
+
+    //零售网点按钮点击事件
+    function shopkeeperdata_onclick() {
+        setcontainertext("");
+        markersclear();
+        for(var i=0;i<shopkeeper_data.length;i++)
+        {
+            LoadSimpleInfoWindow("经销商:"+shopkeeper_data[i].get('name'),[parseFloat(shopkeeper_data[i].get('lng')),parseFloat(shopkeeper_data[i].get('lat'))],
+                "车辆:"+shopkeeper_data[i].get('cars')+"辆;"+'<br/>'
+                +"存储:"+shopkeeper_data[i].get('storage')+"吨;"+'<br/>'
+                +"小麦销售:"+shopkeeper_data[i].get('wheatmarket')+"斤;"+'<br/>'
+                +"花生销量:"+shopkeeper_data[i].get('peanutmarket')+'斤'+'<br/>'
+                + "心连心销量:"+ shopkeeper_data[i].get('xinlianxinmarket')+"吨;"+'<br/>'
+                +"沃利沃销售:"+shopkeeper_data[i].get('woliwomarket')+"吨;"+'<br/>'
+                +"手拉手销售:"+shopkeeper_data[i].get('shoulashoumarket')+"吨"+'<br/>'
+                +"泽丰销售:"+shopkeeper_data[i].get('zefengmarket')+"吨"+'<br/>'
+                +"史丹利销售"+shopkeeper_data[i].get('shidanglimarket')+"吨"+'<br/>'
+                +"三宁销售"+shopkeeper_data[i].get('sangningmarkket')+"吨");+'<br/>'
+        }
+    }
+
+    //种植大户按钮点击事件
+    function plantinglargedata_onclick() {
+        setcontainertext("");
+        markersclear();
+        for(var i=0;i<plantinglarge_data.length;i++)
+        {
+            LoadSimpleInfoWindow("经销商:"+plantinglarge_data[i].get('name'),[parseFloat(plantinglarge_data[i].get('lng')),parseFloat(plantinglarge_data[i].get('lat'))],
+                "车辆:"+plantinglarge_data[i].get('cars')+"辆;"
+                +"存储:"+plantinglarge_data[i].get('storage')+"吨;"
+                +"小麦销售:"+plantinglarge_data[i].get('wheatmarket')+"斤;"
+                +"花生销量:"+plantinglarge_data[i].get('peanutmarket')+'斤'
+                + "心连心销量:"+ plantinglarge_data[i].get('xinlianxinmarket')+"吨;"
+                +"沃利沃销售:"+plantinglarge_data[i].get('woliwomarket')+"吨;"
+                +"手拉手销售:"+plantinglarge_data[i].get('shoulashoumarket')+"吨"
+                +"泽丰销售:"+plantinglarge_data[i].get('zefengmarket')+"吨"
+                +"史丹利销售"+plantinglarge_data[i].get('shidanglimarket')+"吨"
+                +"三宁销售"+plantinglarge_data[i].get('sangningmarkket')+"吨");
+        }
+    }
+
+    //种植结构按钮点击事件
+    function plantation_onclick() {
+        if(address_data!=null)
+        {
+            setcontainertext("小麦(斤)："+address_data.get("wheatdata")+'<br/>'
+                +"玉米(斤)："+address_data.get("maizedata")+'<br/>'
+                +"水稻(斤)："+address_data.get("ricedata")+'<br/>'
+            +"花生(斤)："+address_data.get("peanutdata")+'<br/>'
+            +"油菜(斤)："+address_data.get("oilseeddata")+'<br/>'
+            +"高粱(斤)："+address_data.get("sorghumdata")+'<br/>'
+            +"棉花(斤)："+address_data.get("cottondata")+'<br/>'
+            +"黄豆(斤)："+address_data.get("soybeandata")+'<br/>'
+            +"土豆(斤)："+address_data.get("podatodata"));
+        }else
+        {
+            setcontainertext("暂无数据！");
+        }
+    }
+
+    //市场基本信息按钮点击事件
+    function basicmarket_onclick() {
+        setcontainertext("暂无数据！");
+    }
+
+    //土壤情况按钮点击事件
+    function soilregime_onclick() {
+        setcontainertext("暂无数据！");
+    }
+
+    //区域分析按钮点击事件
+    function regional_onclick() {
+        if(address_data!=null)
+        {
+            setcontainertext("总面积(公里)："+address_data.get("totalarea")+'<br/>'+"总人口(万)："+address_data.get("totalpopulation")+'<br/>'+"耕地面积(万亩)："+address_data.get("totalareaunder"));
+        }else
+            {
+                setcontainertext("暂无数据！");
+            }
+    }
+
+    //指导建议按钮点击事件
+    function guide_onclick() {
+        setcontainertext("暂无数据！");
+    }
+
+    //行业资讯
+    function industryf_onclick() {
+        setcontainertext("暂无数据！");
+    }
+
+    //农机宝典
+    function cheats_onclick() {
+        setcontainertext("暂无数据！");
+    }
+
+    //农业服务
+    function agricultural_onclock() {
+        setcontainertext("暂无数据！");
+    }
+</script>
+<script type="text/javascript">
+    function bluebutton_over(obj) {
+        obj.style.backgroundImage="url(../img/bluebuttonover_img.png)";
+        obj.style.backgroundRepeat = "no-repeat";
+        obj.style.backgroundSize="100% 100%";
+    }
+
+    function bluebutton_out(obj) {
+        obj.style.backgroundImage="url(../img/bluebutton_img.png)";
+        obj.style.backgroundRepeat = "no-repeat";
+        obj.style.backgroundSize="100% 100%";
+    }
+
+    function yelllowbutton_over(obj) {
+        obj.style.backgroundImage="url(../img/yellowbuttonover_img.png)";
+        obj.style.backgroundRepeat = "no-repeat";
+        obj.style.backgroundSize="100% 100%";
+    }
+
+    function yelllowbutton_out(obj) {
+        obj.style.backgroundImage="url(../img/yellowbutton_img.png)";
+        obj.style.backgroundRepeat = "no-repeat";
+        obj.style.backgroundSize="100% 100%";
+    }
+
+    function greenbutton_over(obj) {
+        obj.style.backgroundImage="url(../img/greenbuttonover_img.png)";
+        obj.style.backgroundRepeat = "no-repeat";
+        obj.style.backgroundSize="100% 100%";
+    }
+
+    function greenbutton_out(obj) {
+        obj.style.backgroundImage="url(../img/greenbutton_img.png)";
+        obj.style.backgroundRepeat = "no-repeat";
+        obj.style.backgroundSize="100% 100%";
+    }
+
+    function purplebutton_over(obj) {
+        obj.style.backgroundImage="url(../img/purplebuttonover_img.png)";
+        obj.style.backgroundRepeat = "no-repeat";
+        obj.style.backgroundSize="100% 100%";
+    }
+
+    function purplebutton_out(obj) {
+        obj.style.backgroundImage="url(../img/purplebutton_img.png)";
+        obj.style.backgroundRepeat = "no-repeat";
+        obj.style.backgroundSize="100% 100%";
+    }
+
+    function returnbutton_over(obj) {
+        obj.style.backgroundImage="url(../img/returnover_img.png)";
+        obj.style.backgroundRepeat = "no-repeat";
+        obj.style.backgroundSize="100% 100%";
+    }
+
+    function returnbutton_out(obj) {
+        obj.style.backgroundImage="url(../img/return_img.png)";
+        obj.style.backgroundRepeat = "no-repeat";
+        obj.style.backgroundSize="100% 100%";
+    }
+
 </script>
 
 <script type="text/javascript">
-    var map, district, polygons = [], citycode;
+    var map, district,weather, polygons = [], citycode;
     var citySelect = document.getElementById('city');
     var districtSelect = document.getElementById('district');
-/*    var areaSelect = document.getElementById('street');*/
+    var markers=[];
+    var infoWindows=[];
+    /*    var areaSelect = document.getElementById('street');*/
+
+    function markersclear()
+    {
+        for(var i=0;i<markers.length;i++)
+        {
+            map.remove(markers[i]);
+            infoWindows[i].close;
+        }
+        console.log("清理marker");
+    }
 
     map = new AMap.Map('container', {
         resizeEnable: true,
-        center: [116.30946, 39.937629],
+        /*        center: [116.30946, 39.937629],*/
         zoom: 3,
         mapStyle: 'amap://styles/darkblue',
+        viewMode:'3D', // 地图模式
+        pitch:50, // 地图俯仰角度，有效范围 0 度- 83 度
+        /*        resizeEnable: true,*/
     });
+
+    var loca = Loca.create(map);
+    var layer = Loca.visualLayer(
+        {
+            container:loca,
+            type:'heatmap',
+            shape:'district',//'normal',//'hexagon',
+            eventSupport:'true',
+        });
+
+
+ /*   LoadSimpleInfoWindow("",[116.407394,39.904211]);*/
+/*    setmapheat_render("",[116.407394,39.904211]);*/
+
+/*    function setmapheat_render(name,center) {
+        var data=[{center:center,count:10}];
+
+        layer.setOptions({
+            /!*        style: {
+                        radius: 10,
+                        fill: '#ffee00'
+                    }*!/
+            // 热力半径单位，meter 为米。默认像素 px
+            unit: 'meter',
+            // 数据聚合模式，count 为计数模式
+            // mode: 'max',
+            mode: 'count',
+            style: {
+                // 蜂窝热力半径
+                radius: 10,
+                // 正四边形 / 蜂窝 color 数据为数组形式
+                color:  ['#ecda9a', '#efc47e', '#f3ad6a', '#f7945d', '#f97b57', '#f66356', '#ee4d5a'],
+                height: [0, 500000],
+            },
+
+            selectStyle: {
+                color: '#dbf21d',
+                opacity: 0.9
+            },
+        });
+
+        layer.setData(data, {
+            type: 'json',
+            lnglat: 'center',
+            value: 'count'
+        });
+        layer.render();
+    }
+    
+    function  setmapheat_des() {
+        layer.destroy();
+    }*/
+
+
+/*    var data = [
+        /!*        { 'name': '北京市', 'center': '116.407394,39.904211' },
+                { 'name': '天津市', 'center': '117.200983,39.084158' },
+                { 'name': '河北省', 'center': '114.530235,38.037433' },
+                { 'name': '山西省', 'center': '112.562678,37.873499' },*!/
+        {center:[116.407394,39.904211],count:10}
+    ];*/
+
+/*    layer.on("mousemove",function (event) {
+        console.log('Click target: ', event.lnglat) // 触发click事件的元素
+    });*/
+
+
+    function LoadSimpleInfoWindow(name,pos,text)
+    {
+        AMapUI.loadUI(['overlay/SimpleInfoWindow'], function(SimpleInfoWindow) {
+            console.log(map.getCenter());
+            var marker = new AMap.Marker({
+                map: map,
+                zIndex: 9999999,
+                position: pos,
+            });
+            markers.push(marker);
+
+            var infoWindow = new SimpleInfoWindow({
+
+                infoTitle: name,/*'<strong>name</strong>',*/
+                infoBody: '<p class="my-desc"><strong>详细信息</strong> <br/></p>'+text,
+
+                //基点指向marker的头部位置
+                offset: new AMap.Pixel(0, -31)
+            });
+
+            infoWindows.push(infoWindow);
+            function openInfoWin() {
+                infoWindow.open(map, marker.getPosition());
+/*                map.remove(marker);//删除标记点*/
+            }
+
+            //marker 点击时打开
+            AMap.event.addListener(marker, 'click', function() {
+                openInfoWin();
+            });
+/*
+            openInfoWin();*/
+        });
+    }
+
+
     //行政区划查询
     var opts = {
         subdistrict: 1,   //返回下一级行政区
@@ -264,6 +981,7 @@
         }
     });
     function getData(data,level,objtext) {
+        console.log(data.center);
         var bounds = data.boundaries;
         if (bounds) {
             for (var i = 0, l = bounds.length; i < l; i++) {
@@ -284,13 +1002,26 @@
         if (level === 'province') {
             citySelect.innerHTML = '';
             districtSelect.innerHTML = '';
-/*            areaSelect.innerHTML = '';*/
+            dataclear();
+            /*            areaSelect.innerHTML = '';*/
         } else if (level === 'city') {
             districtSelect.innerHTML = '';
-/*            areaSelect.innerHTML = '';*/
+            dataclear();
+            /*            areaSelect.innerHTML = '';*/
         } else if (level === 'district') {
-            settextdata(objtext);
-/*            areaSelect.innerHTML = '';*/
+            try
+            {
+                settextdata(objtext,"address");
+                //执行实时天气信息查询
+                weather.getForecast(objtext, function(err, data) {
+                    console.log(err, data.forecasts);
+                    setoption3(objtext, data.forecasts);
+                });
+/*                setmapheat_render("",[data.center.lng,data.center.lat]);*/
+            }catch (e) {
+                console.log(e.message);
+            }
+            /*            areaSelect.innerHTML = '';*/
         }
 
         try {
@@ -310,11 +1041,14 @@
                     contentSub.adcode = subList[i].adcode;
                     curList.add(contentSub);
                 }
+                curList.style.color='#1a67e9';
+                curList.style.backgroundColor='rgb(0,0,0)';
             }
         }catch (e) {
             console.log(e.message);
         }
     }
+
     function search(obj) {
         //清除地图上所有覆盖物
         for (var i = 0, l = polygons.length; i < l; i++) {
@@ -336,90 +1070,86 @@
     function setCenter(obj){
         map.setCenter(obj[obj.options.selectedIndex].center)
     }
+
 </script>
+
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
-    var myChart_1 = echarts.init(document.getElementById('column_cs_1'));
-    var myChart_2 = echarts.init(document.getElementById('column_cs_2'));
-    var myChart_3 = echarts.init(document.getElementById('column_cs_3'));
+    var myChart_1 = echarts.init(document.getElementById('chart_data2'));
+    var myChart_2 = echarts.init(document.getElementById('chart_data1'));
+    var myChart_3 = echarts.init(document.getElementById('chart_data3'));
 
     function setoption1(option_1_value1data,option_1_value2data,option_1_value3data)
     {
         option_1 = {
-            backgroundColor:null,//2c343c
-
-            title: {
-                text: '区域信息',
-                left: 'center',
-                size: 50,
-                top: 20,
-                textStyle: {
-                    color: '#ffffff'
-                }
-            },
-
-            tooltip : {
+            tooltip: {
                 trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
             },
-
-            visualMap: {
-                show: false,
-                min: 80,
-                max: 600,
-                inRange: {
-                    colorLightness: [0, 1]
-                }
+            legend: {
+                type: 'scroll',
+                orient: 'horizontal',
+          /*      x: 'left',*/
+                bottom:0,
+                data:['经销商数据','零售商数据','种植大户数据'],
+                textStyle:
+                    {
+                        color:'#ffffff',
+                    }
             },
-            series : [
+            series: [
                 {
-                    name:'区域信息',
+                    name:'访问来源',
                     type:'pie',
-                    radius : '55%',
-                    center: ['50%', '50%'],
-                    data:[
-                        {value:option_1_value1data, name:'经销商数据'},
-                        {value:option_1_value2data, name:'零售商数据'},
-                        {value:option_1_value3data, name:'种植大户数据'},
-                    ].sort(function (a, b) { return a.value - b.value; }),
-                    roseType: 'radius',
+                    radius: ['50%', '65%'],
+                    avoidLabelOverlap: false,
                     label: {
                         normal: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            show: true,
                             textStyle: {
-                                color: 'rgba(255, 255, 255, 0.3)'
+                                fontSize: '20',
+                                fontWeight: 'bold',
+                                color: '#ffffff',
                             }
-                        }
-                    },
-                    labelLine: {
-                        normal: {
-                            lineStyle: {
-                                color: 'rgba(255, 255, 255, 0.3)'
-                            },
-                            smooth: 0.2,
-                            length: 10,
-                            length2: 20
-                        }
-                    },
-                    itemStyle: {
-                        normal: {
-                            color: '#c23531',
-                            shadowBlur: 200,
-                            shadowColor: 'rgba(255,255,255,0.5)'
-                        }
+                        },
                     },
 
-                    animationType: 'scale',
-                    animationEasing: 'elasticOut',
-                    animationDelay: function (idx) {
-                        return Math.random() * 200;
-                    }
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data:[
+                        {value:option_1_value1data, name:'经销商数据',
+                            itemStyle:
+                                {
+                                    color: "#eeb740"
+                                },
+                           },
+                        {value:option_1_value2data, name:'零售商数据',
+                            itemStyle:
+                                {
+                                    color:"#9e46fc"
+                                },
+                        },
+                        {value:option_1_value3data, name:'种植大户数据',
+                            itemStyle:
+                                {
+                                    color: "#0193e8",
+                                },
+                        },
+                    ]
                 }
             ]
         };
         myChart_1.setOption(option_1);
     }
 
-    function setoption2(option_2_value1data,option_2_value2data)
+    function setoption2(option_2_value1data,option_2_value2data,option_2_value3data,option_2_value4data,option_2_value5data,option_2_value6data,option_2_value7data,option_2_value8data,option_2_value9data)
     {
         option_2 = {
             color: ['#3398DB'],
@@ -427,18 +1157,29 @@
                 trigger: 'axis',
                 axisPointer : {            // 坐标轴指示器，坐标轴触发有效
                     type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                }
+                },
+
             },
             grid: {
                 left: '3%',
                 right: '4%',
                 bottom: '3%',
-                containLabel: true
+                containLabel: true,
             },
             xAxis : [
                 {
                     type : 'category',
-                    data : ['大田作物', '经济作物'],
+                    data :[{value:'小麦', textStyle: {color:'#FFFFFF',},},
+                        {value:'玉米', textStyle: {color:'#FFFFFF',},},
+                        {value:'水稻', textStyle: {color:'#FFFFFF',},},
+                        {value:'花生', textStyle: {color:'#FFFFFF',},},
+                        {value:'油菜', textStyle: {color:'#FFFFFF',},},
+                        {value:'高梁', textStyle: {color:'#FFFFFF',},},
+                        {value:'棉花', textStyle: {color:'#FFFFFF',},},
+                        {value:'黄豆', textStyle: {color:'#FFFFFF',},},
+                        {value:'土豆', textStyle: {color:'#FFFFFF',},
+                        }],
+
                     axisTick: {
                         alignWithLabel: true
                     },
@@ -446,92 +1187,147 @@
             ],
             yAxis : [
                 {
-                    type : 'value'
+                    type : 'value',
+                    axisLabel: {
+                        color:"#ffffff",
+                    }
                 }
             ],
             series : [
                 {
-                    name:'(万吨)',
+                    name:'(斤)',
                     type:'bar',
                     barWidth: '60%',
-                    data:[option_2_value1data, option_2_value2data]
+                    data:[option_2_value1data, option_2_value2data, option_2_value3data, option_2_value4data, option_2_value5data, option_2_value6data,option_2_value7data,option_2_value8data,option_2_value9data],
                 }
             ]
         };
         myChart_2.setOption(option_2);
     }
 
-    function setoption3(option_3_value1data,option_3_value2data,option_3_value3data)
+    function setoption3(data_name,date_data)
     {
         option_3 = {
             title: {
-                text: '区域信息漏斗图',
-                subtext: '区域信息'
+                text: data_name,
+  /*              subtext: '纯属虚构'*/
+                textStyle:
+                    {
+                        color:'#ffffff',
+                    }
             },
             tooltip: {
-                trigger: 'item',
-                formatter: "{a} <br/>{b} : {c}%"
+                trigger: 'axis'
             },
-            toolbox: {
+            legend: {
+                data:['最高气温','最低气温'],
+                textStyle:
+                    {
+                        color:'#ffffff',
+                    }
+            },
+/*            toolbox: {
+                show: true,
                 feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
                     dataView: {readOnly: false},
+                    magicType: {type: ['line', 'bar']},
                     restore: {},
                     saveAsImage: {}
                 }
+            },*/
+            xAxis:  {
+                type: 'category',
+                boundaryGap: false,
+/*                data: [data1_date,data2_date,data3_date],*/
+                data :[{
+                    value:date_data[0].date,
+                    textStyle:
+                        {
+                            color:'#FFFFFF',
+                        },
+                    },
+                    {
+                        value:date_data[1].date,
+                        textStyle:
+                            {
+                                color:'#FFFFFF',
+                            },
+                    }, {
+                        value:date_data[2].date,
+                        textStyle:
+                            {
+                                color:'#FFFFFF',
+                            },
+                    },{
+                        value:date_data[3].date,
+                        textStyle:
+                            {
+                                color:'#FFFFFF',
+                            },
+                    }],
             },
-            legend: {
-                data: ['总面积','耕地面积','总人口']
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} °C',
+                    color:"#ffffff",
+                }
             },
-            calculable: true,
             series: [
                 {
-                    name:'区域信息',
-                    type:'funnel',
-                    left: '10%',
-                    top: 60,
-                    //x2: 80,
-                    bottom: 60,
-                    width: '80%',
-                    // height: {totalHeight} - y - y2,
-                    min: 0,
-                    max: 100,
-                    minSize: '0%',
-                    maxSize: '100%',
-                    sort: 'descending',
-                    gap: 2,
-                    label: {
-                        show: true,
-                        position: 'inside'
+                    name:'最高气温',
+                    type:'line',
+                    data:[date_data[0].dayTemp, date_data[1].dayTemp, date_data[2].dayTemp, date_data[3].dayTemp,],
+                    markPoint: {
+                        data: [
+                            {type: 'max', name: '最大值'},
+                            {type: 'min', name: '最小值'}
+                        ]
                     },
-                    labelLine: {
-                        length: 10,
-                        lineStyle: {
-                            width: 1,
-                            type: 'solid'
-                        }
+                    markLine: {
+                        data: [
+                            {type: 'average', name: '平均值'}
+                        ]
+                    }
+                },
+                {
+                    name:'最低气温',
+                    type:'line',
+                    data:[date_data[0].nightTemp, date_data[1].nightTemp, date_data[2].nightTemp, date_data[3].nightTemp],
+                    markPoint: {
+                        data: [
+                            {name: '最低', value: -2, xAxis: 1, yAxis: -1.5}
+                        ]
                     },
-                    itemStyle: {
-                        borderColor: '#fff',
-                        borderWidth: 1
-                    },
-                    emphasis: {
-                        label: {
-                            fontSize: 20
-                        }
-                    },
-                    data: [
-                        {value: option_3_value1data, name: '总面积'},
-                        {value: option_3_value2data, name: '耕地面积'},
-                        {value: option_3_value3data, name: '总人口'},
-                    ]
+                    markLine: {
+                        data: [
+                            {type: 'average', name: '平均值'},
+                            [{
+                                symbol: 'none',
+                                x: '90%',
+                                yAxis: 'max'
+                            }, {
+                                symbol: 'circle',
+                                label: {
+                                    normal: {
+                                        position: 'start',
+            /*                            formatter: '最大值'*/
+                                    }
+                                },
+                                type: 'max',
+                                name: '最高点'
+                            }]
+                        ]
+                    }
                 }
             ]
         };
+
         myChart_3.setOption(option_3);
     }
-
-
-
-
 </script>
+
 </html>
