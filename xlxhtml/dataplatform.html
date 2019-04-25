@@ -682,7 +682,7 @@
         markersclear();
         for(var i=0;i<shopkeeper_data.length;i++)
         {
-            LoadSimpleInfoWindow("经销商:"+shopkeeper_data[i].get('name'),[parseFloat(shopkeeper_data[i].get('lng')),parseFloat(shopkeeper_data[i].get('lat'))],
+            LoadSimpleInfoWindow("零售商:"+shopkeeper_data[i].get('name'),[parseFloat(shopkeeper_data[i].get('lng')),parseFloat(shopkeeper_data[i].get('lat'))],
                 "车辆:"+shopkeeper_data[i].get('cars')+"辆;"+'<br/>'
                 +"存储:"+shopkeeper_data[i].get('storage')+"吨;"+'<br/>'
                 +"小麦销售:"+shopkeeper_data[i].get('wheatmarket')+"斤;"+'<br/>'
@@ -702,16 +702,16 @@
         markersclear();
         for(var i=0;i<plantinglarge_data.length;i++)
         {
-            LoadSimpleInfoWindow("经销商:"+plantinglarge_data[i].get('name'),[parseFloat(plantinglarge_data[i].get('lng')),parseFloat(plantinglarge_data[i].get('lat'))],
-                "车辆:"+plantinglarge_data[i].get('cars')+"辆;"
-                +"存储:"+plantinglarge_data[i].get('storage')+"吨;"
-                +"小麦销售:"+plantinglarge_data[i].get('wheatmarket')+"斤;"
-                +"花生销量:"+plantinglarge_data[i].get('peanutmarket')+'斤'
-                + "心连心销量:"+ plantinglarge_data[i].get('xinlianxinmarket')+"吨;"
-                +"沃利沃销售:"+plantinglarge_data[i].get('woliwomarket')+"吨;"
-                +"手拉手销售:"+plantinglarge_data[i].get('shoulashoumarket')+"吨"
-                +"泽丰销售:"+plantinglarge_data[i].get('zefengmarket')+"吨"
-                +"史丹利销售"+plantinglarge_data[i].get('shidanglimarket')+"吨"
+            LoadSimpleInfoWindow("种植大户:"+plantinglarge_data[i].get('name'),[parseFloat(plantinglarge_data[i].get('lng')),parseFloat(plantinglarge_data[i].get('lat'))],
+                "车辆:"+plantinglarge_data[i].get('cars')+"辆;"+'<br/>'
+                +"存储:"+plantinglarge_data[i].get('storage')+"吨;"+'<br/>'
+                +"小麦销售:"+plantinglarge_data[i].get('wheatmarket')+"斤;"+'<br/>'
+                +"花生销量:"+plantinglarge_data[i].get('peanutmarket')+'斤'+'<br/>'
+                + "心连心销量:"+ plantinglarge_data[i].get('xinlianxinmarket')+"吨;"+'<br/>'
+                +"沃利沃销售:"+plantinglarge_data[i].get('woliwomarket')+"吨;"+'<br/>'
+                +"手拉手销售:"+plantinglarge_data[i].get('shoulashoumarket')+"吨"+'<br/>'
+                +"泽丰销售:"+plantinglarge_data[i].get('zefengmarket')+"吨"+'<br/>'
+                +"史丹利销售"+plantinglarge_data[i].get('shidanglimarket')+"吨"+'<br/>'
                 +"三宁销售"+plantinglarge_data[i].get('sangningmarkket')+"吨");
         }
     }
